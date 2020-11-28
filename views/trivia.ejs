@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guchipoo</title>
+	  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/stylesheets/trivia.css">
+</head>
+<body>
+	<nav  id="myNav" class="navbar bg-dark navbar-top navbar-expand-lg navbar-dark" style="background-color: white;">
+		<div  class="container pt-2 pb-2">
+			  <a class="navbar-brand" href="/"><i class="fas fa-dog"></i> Home</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+				<a class="nav-link active" href="/index">Index</a>
+			  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" href="/timeline">Timeline</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" href="/video">Video</a>
+				  </li>
+					<li class="nav-item">
+					<a class="nav-link active" href="/trivia">Trivia</a>
+				  </li>
+				</ul>
+			  </div>
+		</div>
+	</nav>
+	<div class="container text-center pt-4">
+		<h3>
+			How well do you know Batul?
+		</h3>
+		<p>
+			Do share your result with me :)
+		</p>
+	</div>
+
+    <div id="container">
+        <div id="start">Start Quiz!</div>
+        <div id="quiz" style="display: none">
+            <div id="question"></div>
+            <div id="qImg"></div>
+            <div id="choices">
+                <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+                <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+                <div class="choice" id="C" onclick="checkAnswer('C')"></div>
+            </div>
+            <div id="timer">
+                <div id="counter"></div>
+                <div id="btimeGauge"></div>
+                <div id="timeGauge"></div>
+            </div>
+            <div id="progress"></div>
+        </div>
+        <div id="scoreContainer" style="display: none"></div>
+    </div>
+	
+	<div class="container pt-4">
+		<div class="row text-center">
+			<div class="col-md-6">
+				<img class="image" src="https://i.imgur.com/BU23BMt.jpg">
+			</div>
+			<div class="col-md-6">
+				<img class="image" src="https://i.imgur.com/uSVdtqa.jpg">
+			</div>
+		</div>
+	</div>
+	
+    <script>
+		
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const qImg = document.getElementById("qImg");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const choiceD = document.getElementById("D");
+const choiceE = document.getElementById("E");
+const choiceF = document.getElementById("F");
+const choiceG = document.getElementById("G");
+const choiceH = document.getElementById("H");
+const choiceI = document.getElementById("I");
+const choiceJ = document.getElementById("J");
+const counter = document.getElementById("counter");
+const timeGauge = document.getElementById("timeGauge");
+const progress = document.getElementById("progress");
+const scoreDiv = document.getElementById("scoreContainer");
+
+let questions = [
+    {
+        question : "Which daal does Batul like the most?",
+        imgSrc : "https://i.imgur.com/NfrZ2wb.png",
+        choiceA : "Arad-Chana",
+        choiceB : "Arad",
+        choiceC : "Chana",
+        correct : "A"
+    },{
+        question : "What is Batul's favourite color?",
+        imgSrc : "https://i.imgur.com/uNlUL2g.png",
+        choiceA : "Blue",
+        choiceB : "Black",
+        choiceC : "White",
+        correct : "B"
+    },{
+        question : "The first book Batul ever read was?",
+        imgSrc : "https://i.imgur.com/McK6Qg9.jpg",
+        choiceA : "Da Vinci Code",
+        choiceB : "Famous Five",
+        choiceC : "Mills and Boon",
+        correct : "C"
+    },{
+        question : "Which of these is NOT a special talent of Batul?",
+        imgSrc : "https://i.imgur.com/rNa6nZv.jpg",
+        choiceA : "She can bend her finger all the way",
+        choiceB : "She can binge watch TV Shows",
+        choiceC : "She can touch her nose with her tongue",
+        correct : "B"
+    },{
+        question : "Who is Batul's favourite director?",
+        imgSrc : "https://i.imgur.com/nyfoKR3.png",
+        choiceA : "Karan Johar",
+        choiceB : "Christopher Nolan",
+        choiceC : "Sanjay Leela Bhansali",
+        correct : "B"
+    },{
+        question : "Which one of these is Batul's favourite chocolate?",
+        imgSrc : "https://i.imgur.com/0thQqPG.jpg",
+        choiceA : "Lindt- Milk",
+        choiceB : "Oreo Silk",
+        choiceC : "KitKat",
+        correct : "A"
+    },{
+        question : "Which celebrity is not in Batul's top 5?",
+        imgSrc : "https://i.imgur.com/xpkoAzH.png",
+        choiceA : "Elon Musk",
+        choiceB : "Yuval Noah Harari",
+        choiceC : "Virat Kohli",
+        correct : "C"
+    },{
+        question : "Which is Batul's favourite dialogue which she thinks is cool but it really is not?",
+        imgSrc : "https://i.imgur.com/zbzSfpJ.jpgs",
+        choiceA : "Gooooood",
+        choiceB : "Phalana Dhimkana",
+        choiceC : "Ewu Rakhye",
+        correct : "B"
+    },{
+        question : "Who is/are Batul's favourite singer(s)?",
+        imgSrc : "https://i.imgur.com/TfNPIxM.jpg",
+        choiceA : "One Direction",
+        choiceB : "Ed Sheeran",
+        choiceC : "Jonas Brothers",
+        correct : "C"
+    },{
+        question : "Which movie does Batul love so much she cant stop talking about it?",
+        imgSrc : "https://i.imgur.com/EP1FhxS.png",
+        choiceA : "YJHD",
+        choiceB : "K3G",
+        choiceC : "Inception",
+        correct : "A"
+    }
+];
+
+
+
+const lastQuestion = questions.length - 1;
+let runningQuestion = 0;
+let count = 0;
+const questionTime = 10; // 10s
+const gaugeWidth = 150; // 150px
+const gaugeUnit = gaugeWidth / questionTime;
+let TIMER;
+let score = 0;
+
+// render a question
+function renderQuestion(){
+    let q = questions[runningQuestion];
+    
+    question.innerHTML = "<p>"+ q.question +"</p>";
+    qImg.innerHTML = "<img src="+ q.imgSrc +">";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+}
+
+start.addEventListener("click",startQuiz);
+
+// start quiz
+function startQuiz(){
+    start.style.display = "none";
+    renderQuestion();
+    quiz.style.display = "block";
+    renderProgress();
+    renderCounter();
+    TIMER = setInterval(renderCounter,1000); // 1000ms = 1s
+}
+
+
+function renderProgress(){
+    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++){
+        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
+    }
+}
+
+
+
+function renderCounter(){
+    if(count <= questionTime){
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
+        count++
+    }else{
+        count = 0;
+        // change progress color to red
+        answerIsWrong();
+        if(runningQuestion < lastQuestion){
+            runningQuestion++;
+            renderQuestion();
+        }else{
+            // end the quiz and show the score
+            clearInterval(TIMER);
+            scoreRender();
+        }
+    }
+}
+
+
+
+function checkAnswer(answer){
+    if( answer == questions[runningQuestion].correct){
+        // answer is correct
+        score++;
+        // change progress color to green
+        answerIsCorrect();
+    }else{
+        // answer is wrong
+        // change progress color to red
+        answerIsWrong();
+    }
+    count = 0;
+    if(runningQuestion < lastQuestion){
+        runningQuestion++;
+        renderQuestion();
+    }else{
+        // end the quiz and show the score
+        clearInterval(TIMER);
+        scoreRender();
+    }
+}
+
+
+function answerIsCorrect(){
+    document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+}
+
+
+function answerIsWrong(){
+    document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+}
+
+
+function scoreRender(){
+    scoreDiv.style.display = "block";
+    
+    // calculate the amount of question percent answered by the user
+    const scorePerCent = Math.round(100 * score/questions.length);
+    
+    // choose the image based on the scorePerCent
+    let img = (scorePerCent >= 80) ? "https://i.imgur.com/9VoekHu.png" :
+              (scorePerCent >= 60) ? "https://i.imgur.com/rac3kN0.png" :
+              (scorePerCent >= 40) ? "https://i.imgur.com/rac3kN0.png" :
+              (scorePerCent >= 20) ? "https://i.imgur.com/pSdil0d.png" :
+              "https://i.imgur.com/wob41Pc.png";
+    
+    scoreDiv.innerHTML = "<img src="+ img +">";
+    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+}
+	
+	</script>
+<%- include("partials/footer") %>

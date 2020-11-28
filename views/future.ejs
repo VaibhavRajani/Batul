@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<link rel="stylesheet" href="/stylesheets/todos.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+	<script src="https://code.jquery.com/jquery-2.1.4.js" integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="container">
+	<h1>OUR BUCKET LIST <i class="fa fa-plus"></i></h1>
+	<input type="text" placeholder="Add New Todo">
+
+	<ul>
+		<li><span><i class="fa fa-trash"></i></span> A VERYYYYY LONG HUG</li>
+		<li><span><i class="fa fa-trash"></i></span> GO FOR A TREK</li>
+		<li><span><i class="fa fa-trash"></i></span> GO FOR A LONG DRIVE</li>
+		<li><span><i class="fa fa-trash"></i></span> GO TO AN AMUSEMENT PARK</li>
+		<li><span><i class="fa fa-trash"></i></span> GO FOR A WEEKEND GETAWAY</li>
+		<li><span><i class="fa fa-trash"></i></span> GO FOR A LONGGGG TRIP</li>
+		<li><span><i class="fa fa-trash"></i></span> GO FOR BUNGEE JUMPING</li>
+		<li><span><i class="fa fa-trash"></i></span> BINGE WATCH TV SHOWS TOGETHER (NOT JP)</li>
+		<li><span><i class="fa fa-trash"></i></span> KISS UNDER THE MISTLETOE</li>
+		<li><span><i class="fa fa-trash"></i></span> SPEND THE NIGHT TOGETHER</li>
+		<li><span><i class="fa fa-trash"></i></span> HAVE ARAD-CHANA DAAL TOGETHER</li>
+		<li><span><i class="fa fa-trash"></i></span> MAKE THAT "PERFECT" VIDEO</li>
+		<li><span><i class="fa fa-trash"></i></span> END UP IN THE SAME STATE (IF NOT SAME COLLEGE) FOR MASTERS</li>
+		<li><span><i class="fa fa-trash"></i></span> LIVE TOGETHER</li>
+		<li><span><i class="fa fa-trash"></i></span> GET A PET DOG TOGETHER</li>
+		<li><span><i class="fa fa-trash"></i></span> CONVINCE PARENTS AND GET OFFICIAL</li>
+		<li><span><i class="fa fa-trash"></i></span> GET MARRIED TO EACH OTHER</li>
+		<li><span><i class="fa fa-trash"></i></span> SPEND OUR ENTIRE LIVES WITH EACH OTHER</li>
+	</ul>
+</div>
+
+<script>
+	// Check Off Specific Todos By Clicking
+	$("ul").on("click", "li", function(){
+		$(this).toggleClass("completed");
+	});
+
+	//Click on X to delete Todo
+	$("ul").on("click", "span", function(event){
+		$(this).parent().fadeOut(500,function(){
+			$(this).remove();
+		});
+		event.stopPropagation();
+	});
+
+	$("input[type='text']").keypress(function(event){
+		if(event.which === 13){
+			//grabbing new todo text from input
+			var todoText = $(this).val();
+			$(this).val("");
+			//create a new li and add to ul
+			$("ul").append("<li><span><i class='fa fa-trash'></i></span> " + todoText + "</li>")
+		}
+	});
+
+	$(".fa-plus").click(function(){
+		$("input[type='text']").fadeToggle();
+	});
+	</script>
+	
+</body>
+</html>
