@@ -52,8 +52,8 @@ app.get("/angry", function(req,res){
 	res.render("angry");
 });
 
-app.get("/dts", function(req,res){
-	res.render("dts");
+app.get("/sent", function(req,res){
+	res.render("sent");
 });
 
 app.get("/missing", function(req,res){
