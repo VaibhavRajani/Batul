@@ -1,9 +1,14 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+const sendMail = require("./mail");
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
@@ -71,8 +76,22 @@ app.get("/dguom", function(req,res){
 	res.render("dguom");
 });
 
-app.get("/rap", function(req,res){
-	res.render("rap");
+app.get("/coupon", function(req,res){
+	res.render("coupon");
+});
+
+app.post('/coupon', (req, res) => {
+    const { subject, text} = req.body;
+    console.log('Data: ', req.body);
+
+    sendMail(subject, text, function(err, data) {
+        if (err) {
+            console.log('ERROR: ', err);
+            return res.status(500).json({ message: err.message || 'Internal Error' });
+        }
+        console.log('Email sent!!!');
+        return res.json({ message: 'Email sent!!!!!' });
+    });
 });
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(){
