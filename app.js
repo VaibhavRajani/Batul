@@ -24,6 +24,26 @@ app.get("/secret", function(req,res){
 	res.render("secret");
 });
 
+app.get("/letter", function(req,res){
+	res.render("letter");
+});
+
+app.get("/first", function(req,res){
+	res.render("first");
+});
+
+app.get("/dip", function(req,res){
+	res.render("dip");
+});
+
+app.get("/reborn", function(req,res){
+	res.render("reborn");
+});
+
+app.get("/ever", function(req,res){
+	res.render("ever");
+});
+
 app.get("/timeline", function(req,res){
 	res.render("timeline");
 });
