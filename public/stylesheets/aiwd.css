@@ -1,0 +1,27 @@
+p {
+	align-items: center;
+  display: inline;
+  font-size: 40px;
+  margin-top: 0px;
+  font-family: armenian;
+  color: brown;
+	font-weight: bold;
+}
+
+body{
+	background: #81dafc;
+}
+
+#para1{
+	color: white;
+	font-size: 40px;
+	font-weight: bold;
+	
+}
+
+#para2{
+	color: white;
+	font-size: 20px;
+	font-weight: italic;
+	
+}

@@ -100,6 +100,10 @@ app.get("/coupon", function(req,res){
 	res.render("coupon");
 });
 
+app.get("/aiwd", function(req,res){
+	res.render("aiwd");
+});
+
 app.post('/coupon', (req, res) => {
     const { subject, text} = req.body;
     console.log('Data: ', req.body);
